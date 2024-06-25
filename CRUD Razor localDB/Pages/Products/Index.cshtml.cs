@@ -12,14 +12,16 @@ namespace CRUD_Razor_localDB.Pages.Products
 {
     public class IndexModel : PageModel
     {
-        private readonly CRUD_Razor_localDB.Data.ApplicationDBContext _context;
+        private readonly ApplicationDBContext _context;
 
-        public IndexModel(CRUD_Razor_localDB.Data.ApplicationDBContext context)
+        public IndexModel(ApplicationDBContext context)
         {
             _context = context;
         }
 
         public IList<Product> Product { get;set; } = default!;
+        [TempData]
+        public string Mensaje { get; set; }
 
         public async Task OnGetAsync()
         {

@@ -12,9 +12,9 @@ namespace CRUD_Razor_localDB.Pages.Products
 {
     public class CreateModel : PageModel
     {
-        private readonly CRUD_Razor_localDB.Data.ApplicationDBContext _context;
+        private readonly ApplicationDBContext _context;
 
-        public CreateModel(CRUD_Razor_localDB.Data.ApplicationDBContext context)
+        public CreateModel(ApplicationDBContext context)
         {
             _context = context;
         }
@@ -26,7 +26,9 @@ namespace CRUD_Razor_localDB.Pages.Products
 
         [BindProperty]
         public Product Product { get; set; }
-        
+        [TempData]
+        public string Mensaje { get; set; }
+
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
@@ -38,7 +40,7 @@ namespace CRUD_Razor_localDB.Pages.Products
 
             _context.Products.Add(Product);
             await _context.SaveChangesAsync();
-
+            Mensaje = "Product created successfully";
             return RedirectToPage("./Index");
         }
     }

@@ -12,15 +12,17 @@ namespace CRUD_Razor_localDB.Pages.Products
 {
     public class DeleteModel : PageModel
     {
-        private readonly CRUD_Razor_localDB.Data.ApplicationDBContext _context;
+        private readonly ApplicationDBContext _context;
 
-        public DeleteModel(CRUD_Razor_localDB.Data.ApplicationDBContext context)
+        public DeleteModel(ApplicationDBContext context)
         {
             _context = context;
         }
 
         [BindProperty]
-      public Product Product { get; set; }
+        public Product Product { get; set; }
+        [TempData]
+        public string Mensaje { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -56,7 +58,7 @@ namespace CRUD_Razor_localDB.Pages.Products
                 _context.Products.Remove(Product);
                 await _context.SaveChangesAsync();
             }
-
+            Mensaje = "Product deleted successfully";
             return RedirectToPage("./Index");
         }
     }

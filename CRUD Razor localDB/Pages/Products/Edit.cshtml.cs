@@ -22,7 +22,8 @@ namespace CRUD_Razor_localDB.Pages.Products
 
         [BindProperty]
         public Product Product { get; set; } = default!;
-
+        [TempData]
+        public string Mensaje { get; set; }
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null || _context.Products == null)
@@ -38,9 +39,6 @@ namespace CRUD_Razor_localDB.Pages.Products
             Product = product;
             return Page();
         }
-
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
@@ -65,7 +63,7 @@ namespace CRUD_Razor_localDB.Pages.Products
                     throw;
                 }
             }
-
+            Mensaje = "Product edited successfully";
             return RedirectToPage("./Index");
         }
 

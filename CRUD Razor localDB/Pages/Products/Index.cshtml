@@ -4,55 +4,65 @@
 @{
     ViewData["Title"] = "Index";
 }
+@if(Model.Mensaje != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @Model.Mensaje
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
 
 <h1>Index</h1>
 
 <p>
-    <a asp-page="Create">Create New</a>
+    <a asp-page="Create" class="btn btn-outline-success">Create New</a>
 </p>
 <table class="table">
     <thead>
         <tr>
-            <th>
+            <th class="table-dark">
                 @Html.DisplayNameFor(model => model.Product[0].name)
             </th>
-            <th>
+            <th class="table-dark">
                 @Html.DisplayNameFor(model => model.Product[0].description)
             </th>
-            <th>
+            <th class="table-dark">
                 @Html.DisplayNameFor(model => model.Product[0].price)
             </th>
-            <th>
+            <th class="table-dark">
                 @Html.DisplayNameFor(model => model.Product[0].quantity)
             </th>
-            <th>
+            <th class="table-dark">
                 @Html.DisplayNameFor(model => model.Product[0].creationDate)
             </th>
-            <th></th>
+            <th class="table-dark">
+                Actions
+            </th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model.Product) {
         <tr>
-            <td>
+            <td class="table-light">
                 @Html.DisplayFor(modelItem => item.name)
-            </td>
+            </td >
             <td>
                 @Html.DisplayFor(modelItem => item.description)
             </td>
-            <td>
+            <td class="table-light">
                 @Html.DisplayFor(modelItem => item.price)
             </td>
-            <td>
+            <td class="table-light">
                 @Html.DisplayFor(modelItem => item.quantity)
             </td>
-            <td>
+            <td class="table-light">
                 @Html.DisplayFor(modelItem => item.creationDate)
             </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.id">Delete</a>
+                <td class="table-light">
+                <a asp-page="./Edit" asp-route-id="@item.id" class="btn btn-success">Edit</a>
+                <a asp-page="./Details" asp-route-id="@item.id" class="btn btn-primary">Details</a>
+                <a asp-page="./Delete" asp-route-id="@item.id" class="btn btn-danger">Delete</a>
             </td>
         </tr>
 }
